@@ -1,0 +1,9 @@
+body{
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+.arrow{
+    width:100px;
+    height: auto;
+}
