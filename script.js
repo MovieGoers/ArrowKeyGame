@@ -39,9 +39,13 @@ function OnKeyDown(event){
     if(CheckInputArrow(current_arrow, event.keyCode)){
         ChangeArrowImgToRed(current_arrow, event.keyCode);
         current_arrow++;
+        if(current_arrow === arrow_size){
+            alert('Next Level!');
+        }
     }else{
         current_arrow = 0;
         ChangeAllArrowToBlack();
+        alert('Typed Wrong!');
     }
 }
 
