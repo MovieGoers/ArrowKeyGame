@@ -29,7 +29,12 @@ function DrawArrowArray(){
     }
 }
 
+// it will reset variables, screen and create arrows on screen.
 function GenerateArrows(){
+    current_arrow = 0;
+    arrow_array = [];
+    arrows.innerHTML = '';
+
     CreateArrowArray();
     DrawArrowArray();
 }
@@ -40,9 +45,12 @@ function OnKeyDown(event){
         ChangeArrowImgToRed(current_arrow, event.keyCode);
         current_arrow++;
         if(current_arrow === arrow_size){
-            alert('Next Level!');
+            // Cleared! to the next Stage!
+            GenerateArrows();
+            isCleared = 1;
         }
     }else{
+        // Failed..
         current_arrow = 0;
         ChangeAllArrowToBlack();
         alert('Typed Wrong!');
@@ -79,4 +87,8 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min; //최댓값도 포함, 최솟값도 포함
   }
 
-  GenerateArrows();
+function Game(){
+    GenerateArrows();
+}
+
+Game();
