@@ -1,6 +1,7 @@
 const mainBody = document.querySelector('.mainbody');
 const wrongButtonSound = document.getElementById('wrong-button-sound');
 const tenSecondSound = document.getElementById('10second-sound');
+const bellSound = document.getElementById('bell-sound');
 
 let arrow_size = 10; // 화면에 나타나는 버튼 개수.
 let arrow_array = [];
@@ -9,6 +10,8 @@ let current_arrow = 0;
 let timersetting = 30; // 시간 설정.
 let temptime = 0;
 let gamestarted = 0;
+let bestScore = 0;
+let timePlus = 2;
 
 function SetTime(){
     const timeText = document.querySelector('.timer');
@@ -87,6 +90,11 @@ function OnKeyDown(event){
             // Cleared! to the next Stage!
             GenerateArrows();
             isCleared = 1;
+            time += timePlus;
+            bellSound.load();
+            bellSound.play();
+            scoreNumber.style.color = 'blue';
+            scoreText.style.color = 'blue';
         }
     }else{
         // Failed..
@@ -122,7 +130,7 @@ function CheckInputArrow(currArrow, inputArrow){
         isInputCorrect = 1;
     }
 
-    return isInputCorrect;
+    return isInputCorrect;OnKeyDown
 }
 
 //randomly generate integer from 0 to 3
@@ -203,18 +211,26 @@ function TimeOver(){
     mainBody.innerHTML = '';
 
     const gameOverText = document.createElement('div');
+    const bestScoreText = document.createElement('div');
     const finalScoreText = document.createElement('div');
     const gameStartAgainText = document.createElement('div');
 
     gameOverText.setAttribute('class', 'game-over-text');
+    bestScoreText.setAttribute('class', 'best-score-text');
     finalScoreText.setAttribute('class', 'final-score-text');
     gameStartAgainText.setAttribute('class', 'game-start-again-text');
 
+    if(score >= bestScore){
+        bestScore = score;
+    }
+
     gameOverText.textContent = 'GAME OVER!!';
-    finalScoreText.textContent = 'Score : ' + score;
+    bestScoreText.textContent = 'Best Score : ' + bestScore;
+    finalScoreText.textContent = 'Your Score : ' + score;
     gameStartAgainText.textContent = 'Press Spacebar to Start Again!!'
 
     mainBody.appendChild(gameOverText);
+    mainBody.appendChild(bestScoreText);
     mainBody.appendChild(finalScoreText);
     mainBody.appendChild(gameStartAgainText);
 }

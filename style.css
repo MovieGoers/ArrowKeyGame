@@ -42,6 +42,10 @@
     font-size: 40px;
 }
 .final-score-text{
-    padding-top: 100px;
+    padding-top: 60px;
     font-size: 60px;
+}
+.best-score-text{
+    padding-top: 50px;
+    font-size: 40px;
 }
