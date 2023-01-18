@@ -41,7 +41,7 @@ function SetTime(){
             clearInterval(x);
             TimeOver();
         }
-    }, 10); // 1000은 1초 마다 실행됨을 의미.
+    }, 10); // 10은 0.01초 마다 함수가 실행됨을 의미.
 }
 
 //create array of arrows
@@ -138,7 +138,7 @@ function CheckInputArrow(currArrow, inputArrow){
     return isInputCorrect;OnKeyDown
 }
 
-//randomly generate integer from 0 to 3
+//randomly generate integer from min to max
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -253,10 +253,10 @@ function TimeOver(){
         timeOpacity += 0.01
         if (Math.floor(timeOpacity) % 2 === Number(0)){
             opacityText -= 0.01;
-            gameStartAgainText.style.opacity = opacityText
+            gameStartAgainText.style.opacity = opacityText;
         }else if(Math.floor(timeOpacity) % 2 === Number(1)){
             opacityText += 0.01;
-            gameStartAgainText.style.opacity = opacityText
+            gameStartAgainText.style.opacity = opacityText;
         }
     }, 10);
 
