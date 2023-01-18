@@ -20,7 +20,8 @@ function SetTime(){
     let x = setInterval(function(){
         timeText.textContent = time.toFixed(2);
         time -= 0.01;
-        timeBar.style.width = time*20 + 'px'
+        timeBar.style.width = time*20 + 'px';
+        
         if(time < 10){
             // 10초 미만이면 빨강색으로 변경.
             timeBar.style.backgroundColor = 'red';
@@ -35,6 +36,7 @@ function SetTime(){
             timeBar.style.backgroundColor = 'black';
             timeText.style.color = 'black';
         }
+
         if(time < 0){
             clearInterval(x);
             TimeOver();
@@ -187,6 +189,19 @@ function SetStartMenu(){
     titleText.textContent = 'Arrow Game';
     spaceBarStartText.textContent = 'Press Any Key To Start!';
 
+    let opacityText = 1;
+    let timeOpacity = 0;
+    let y = setInterval(function() {
+        timeOpacity += 0.01
+        if (Math.floor(timeOpacity) % 2 === Number(0)){
+            opacityText -= 0.01;
+            spaceBarStartText.style.opacity = opacityText
+        }else if(Math.floor(timeOpacity) % 2 === Number(1)){
+            opacityText += 0.01;
+            spaceBarStartText.style.opacity = opacityText
+        }
+    }, 10);
+
     mainBody.appendChild(titleText);
     mainBody.appendChild(spaceBarStartText);
 }
@@ -231,6 +246,19 @@ function TimeOver(){
     bestScoreText.textContent = 'Best Score : ' + bestScore;
     finalScoreText.textContent = 'Your Score : ' + score;
     gameStartAgainText.textContent = 'Press Spacebar to Start Again!!'
+
+    let opacityText = 1;
+    let timeOpacity = 0;
+    let y = setInterval(function() {
+        timeOpacity += 0.01
+        if (Math.floor(timeOpacity) % 2 === Number(0)){
+            opacityText -= 0.01;
+            gameStartAgainText.style.opacity = opacityText
+        }else if(Math.floor(timeOpacity) % 2 === Number(1)){
+            opacityText += 0.01;
+            gameStartAgainText.style.opacity = opacityText
+        }
+    }, 10);
 
     mainBody.appendChild(gameOverText);
     mainBody.appendChild(bestScoreText);
