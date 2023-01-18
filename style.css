@@ -1,9 +1,47 @@
-body{
-    display: flex;
-    justify-content: center;
-    padding-top: 100px;
+*{
+    font-family: 'Roboto', sans-serif;
 }
 .arrow{
     width:100px;
     height: auto;
+}
+.mainbody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.score-text{
+    font-size: 50px;
+}
+.score{
+    font-size: 150px;
+}
+.timer{
+    padding-top: 50px;
+    font-size: 30px;
+}
+.timebar{
+    height:30px;
+    width: 600px;
+    background-color: black;
+}
+.title{
+    padding-top: 60px;
+    font-size : 80px;
+}
+.space-bar-text{
+    padding-top: 80px;
+    font-size: 40px;
+}
+.game-over-text{
+    padding-top: 60px;
+    font-size: 100px;
+}
+.game-start-again-text{
+    padding-top: 60px;
+    font-size: 40px;
+}
+.final-score-text{
+    padding-top: 100px;
+    font-size: 60px;
 }
