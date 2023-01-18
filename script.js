@@ -31,6 +31,9 @@ function SetTime(){
                 tenSecondSound.play();
                 temptime = 2;
             } // 2초마다 소리 재생.
+        }else{
+            timeBar.style.backgroundColor = 'black';
+            timeText.style.color = 'black';
         }
         if(time < 0){
             clearInterval(x);
