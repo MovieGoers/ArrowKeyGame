@@ -74,6 +74,7 @@ function GenerateArrows(){
     current_arrow = 0;
     arrow_array = [];
     arrows.innerHTML = '';
+    arrows.style.width = 1075+'px'
 
     CreateArrowArray();
     DrawArrowArray();
