@@ -1,6 +1,11 @@
 *{
     font-family: 'Roboto', sans-serif;
 }
+#arrows{
+    display: flex;
+    width: 1070px;
+    justify-content: space-around;
+}
 .arrow{
     width:100px;
     height: auto;
