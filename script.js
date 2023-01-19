@@ -2,6 +2,7 @@ const mainBody = document.querySelector('.mainbody');
 const wrongButtonSound = document.getElementById('wrong-button-sound');
 const tenSecondSound = document.getElementById('10second-sound');
 const bellSound = document.getElementById('bell-sound');
+const gameEndSound = document.getElementById('game-end-sound');
 
 let arrow_size = 10; // 화면에 나타나는 버튼 개수.
 let arrow_array = [];
@@ -98,8 +99,17 @@ function OnKeyDown(event){
             time += timePlus;
             bellSound.load();
             bellSound.play();
-            scoreNumber.style.color = 'blue';
-            scoreText.style.color = 'blue';
+            scoreNumber.style.color = "rgb(0,0,255)";
+            scoreText.style.color = "rgb(0,0,255)";
+
+            let rgbBlue = 255;
+            let z = setInterval(function() {
+                if(rgbBlue >= 0){
+                    rgbBlue -= 1;
+                    scoreNumber.style.color = "rgb(0,0,"+rgbBlue+" )";
+                    scoreText.style.color = "rgb(0,0,"+rgbBlue+" )";
+                }
+            }, 10);
         }
     }else{
         // Failed..
@@ -119,12 +129,31 @@ function ChangeAllArrowToBlack(){
     for(let i = 0; i<arrow_size; i++){
         let arrowTemp = document.getElementById('arrow'+i);
         arrowTemp.setAttribute('src', arrow_type[arrow_array[i]]+'.jpg');
+        arrowTemp.style.width = 100 + 'px';
+        arrowTemp.style.padding = 0 + 'px';
     }
 }
 
 function ChangeArrowImgToRed(currArrowIndex, currArrowType){
     let arrowTemp = document.getElementById('arrow'+currArrowIndex);
     arrowTemp.setAttribute('src', arrow_type[currArrowType - Number(37)]+'r.jpg');
+
+    let arrowTempSize = 100;
+    let arrowTempPadding = 0;
+    let arrowTempShrinkSpeed = 2;
+
+    arrowTemp.style.width = arrowTempSize + 'px';
+    arrowTemp.style.padding = arrowTempPadding + 'px';
+    let z = setInterval(function() {
+        if(arrowTempSize >= 80){
+            arrowTempSize -= arrowTempShrinkSpeed * 2;
+            arrowTemp.style.width = arrowTempSize + 'px';
+        }
+        if(arrowTempPadding <= 10){
+            arrowTempPadding += arrowTempShrinkSpeed;
+            arrowTemp.style.padding = arrowTempPadding + 'px';
+        }
+    }, 10);
 }
 
 // check if current arrow and input are same, returns 1 if correct, else return 0;
@@ -232,20 +261,29 @@ function TimeOver(){
     const bestScoreText = document.createElement('div');
     const finalScoreText = document.createElement('div');
     const gameStartAgainText = document.createElement('div');
+    const newBestScoreText = document.createElement('div');
 
     gameOverText.setAttribute('class', 'game-over-text');
     bestScoreText.setAttribute('class', 'best-score-text');
     finalScoreText.setAttribute('class', 'final-score-text');
     gameStartAgainText.setAttribute('class', 'game-start-again-text');
+    newBestScoreText.setAttribute('class', 'new-best-score-text');
 
-    if(score >= bestScore){
+    
+    if(score > bestScore){
+        //최고 기록 경신 시 실행.
         bestScore = score;
+        gameOverText.textContent = '';
+        newBestScoreText.textContent = "WOW! NEW RECORD!! CONGRATULATIONS!!";
+
+    }else{
+        newBestScoreText.textContent = '';
+        gameOverText.textContent = 'GAME OVER!!';
     }
 
-    gameOverText.textContent = 'GAME OVER!!';
     bestScoreText.textContent = 'Best Score : ' + bestScore;
     finalScoreText.textContent = 'Your Score : ' + score;
-    gameStartAgainText.textContent = 'Press Spacebar to Start Again!!'
+    gameStartAgainText.textContent = 'Press Spacebar to Start Again!!';
 
     let opacityText = 1;
     let timeOpacity = 0;
@@ -260,7 +298,10 @@ function TimeOver(){
         }
     }, 10);
 
+    gameEndSound.play();
+
     mainBody.appendChild(gameOverText);
+    mainBody.appendChild(newBestScoreText);
     mainBody.appendChild(bestScoreText);
     mainBody.appendChild(finalScoreText);
     mainBody.appendChild(gameStartAgainText);

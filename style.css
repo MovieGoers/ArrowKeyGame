@@ -34,7 +34,7 @@
     font-size: 40px;
 }
 .game-over-text{
-    padding-top: 60px;
+    padding-top: 30px;
     font-size: 100px;
 }
 .game-start-again-text{
@@ -48,4 +48,8 @@
 .best-score-text{
     padding-top: 50px;
     font-size: 40px;
+}
+.new-best-score-text{
+    padding-top: 30px;
+    font-size: 50px;
 }
